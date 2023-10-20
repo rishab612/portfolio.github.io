@@ -6,6 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>vCard - Personal Portfolio</title>
+  <style>
+    @media print {
+  .print-hide {
+    display: none;
+  }
+}
+
+  </style>
 
   <!--
     - favicon
@@ -119,10 +127,31 @@
               <address>Chandigarh, India</address>
             </div>
 
+          </li class="contact-info">
+          <button id="print-button" class="navbar-link">Print</button>
+          <li>
+            
           </li>
 
         </ul>
-
+        <script>
+          const printButton = document.getElementById("print-button");
+        
+          printButton.addEventListener("click", () => {
+            // Remove the "print-hide" class before printing
+            document.querySelector(".navbar").classList.remove("print-hide");
+        
+            // Trigger the print dialog
+            window.print();
+        
+            // Add back the "print-hide" class after printing is done (using a timeout)
+            setTimeout(() => {
+              document.querySelector(".navbar").classList.add("print-hide");
+            }, 100);
+          });
+        </script>
+        
+        
         <div class="separator"></div>
 
         <ul class="social-list">
@@ -160,7 +189,7 @@
     <div class="main-content">
 
 
-      <nav class="navbar">
+      <nav class="navbar print-hide">
 
         <ul class="navbar-list">
 
@@ -957,7 +986,18 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+  <script>
+    document.addEventListener("contextmenu", function(e) {
+      e.preventDefault(); // Disable the right-click context menu
+    });
+  
+    document.onkeydown = function(e) {
+      if (e.ctrlKey && (e.key === "c" || e.key === "u")) {
+        // Disable Ctrl+C and Ctrl+U
+        return false;
+      }
+    };
+  </script>
 </body>
 
 </html>
